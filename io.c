@@ -27,7 +27,5 @@ void write_file(const char *p, const char *data)
 
 int file_exist(const char *p)
 {
-    if(access(p, 0) == -1)
-        return 0;
-    return 1;
+    return (access(p, 0) == -1) ? 0 : 1;
 }

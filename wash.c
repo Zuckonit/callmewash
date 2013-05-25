@@ -46,9 +46,9 @@ void welcome()  /*welcome content when you running the program*/
 
 int plus_day()
 {
-    char *buf = read_file(f_record);
+    char *buf = read_file(f_date);
     int day = atoi(buf);
-    char str[MAX_CHAR];
+    char *str = (char*)malloc(sizeof(char)*MAX_CHAR);
     int _day;
     if (day == 0) {
         printf("Error data (integer instead) have been existed in %s", f_record);
@@ -61,6 +61,7 @@ int plus_day()
         day++;
     sprintf(str, "%d", day);
     write_file(f_record, str);
+    free(str);
     return day;
 }
 
@@ -77,6 +78,7 @@ int update_date()
         write_file(f_date, c_date);
         return 1;
     }
+    free(c_date);
     return 0;
 }
 
@@ -96,11 +98,11 @@ int main(int argc, const char *argv[])
 
     welcome();
     init();
+    printf("%s days after your last washing!\n",read_file(f_record));
     if(!update_date()) {
         printf("You have checked today!");
         exit(1);
     }
-    printf("%s days after your last washing!\n",read_file(f_record));
     printf("Have you washed your clothes? (Y/N)/(y/n): ");
     ch = getchar();
     getchar();

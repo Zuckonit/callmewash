@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-O -Wall -ansi
+CFLAGS=-O3 -Wall -ansi
 INCLUDE=.
 APPNAME=callmewash
 INSTALL_PATH=/usr/bin/

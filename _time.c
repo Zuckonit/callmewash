@@ -39,12 +39,12 @@ char *get_current_time()
 }
 
 
-Date *pack_date(const char *str)
+Date pack_date(const char *str)
 {
-    Date *d = (Date *)malloc(sizeof(Date));
-    d->tm_year = atoi(split(str,0,4)) - 1900;
-    d->tm_mon = atoi(split(str,4,6)) - 1;
-    d->tm_mday = atoi(split(str,6,8));
+    Date d;
+    d.tm_year = atoi(split(str,0,4)) - 1900;
+    d.tm_mon  = atoi(split(str,4,6)) - 1;
+    d.tm_mday = atoi(split(str,6,8));
     return d;
 }
 
@@ -52,9 +52,9 @@ Date *pack_date(const char *str)
 int diff_day(const char *day1, const char *day2)
 {
     long t;
-    Date *tm1,*tm2;
+    Date tm1,tm2;
     tm1 = pack_date(day1);
     tm2 = pack_date(day2);
-    t=(long)difftime(mktime(tm1), mktime(tm2));
+    t=(long)difftime(mktime(&tm1), mktime(&tm2));
     return(abs(t/24/3600));
 }
